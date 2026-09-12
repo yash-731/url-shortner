@@ -1,0 +1,15 @@
+line-length = 100
+target-version = "py313"
+
+[lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[lint.flake8-bugbear]
+# Depends()/Query() in defaults is how FastAPI declares dependencies.
+extend-immutable-calls = [
+    "fastapi.Depends",
+    "fastapi.Query",
+    "fastapi.Path",
+    "fastapi.Header",
+    "fastapi.Body",
+]
