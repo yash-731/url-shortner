@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 
 from .cache import cache, close_cache, init_cache
 from .config import get_settings
@@ -48,6 +49,11 @@ async def health() -> dict:
         "database_fell_back": db.is_fallback,
         "cache": cache.backend.name,
     }
+
+
+@app.get("/", include_in_schema=False)
+async def root() -> RedirectResponse:
+    return RedirectResponse("/docs")
 
 
 # Registered last so /api and /health win the match against the catch-all short code.

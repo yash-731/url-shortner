@@ -14,6 +14,12 @@ async def test_redirect_sends_visitor_to_target(client):
     assert response.headers["location"] == "https://example.com/page"
 
 
+async def test_root_redirects_to_docs(client):
+    response = await client.get("/")
+    assert response.status_code == 307
+    assert response.headers["location"] == "/docs"
+
+
 async def test_unknown_code_is_404(client):
     assert (await client.get("/nosuchcode")).status_code == 404
 
