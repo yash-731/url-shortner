@@ -70,7 +70,7 @@ with no infrastructure. `GET /health` reports which backends are actually live.
 | `GET` | `/{code}` | – | Redirect to the target URL |
 | `GET` | `/health` | – | Liveness plus active backends |
 
-Interactive docs at `/docs`.
+Interactive docs at `/docs` — the root URL `/` redirects there.
 
 Rate limits are fixed-window per IP, counted in Redis so they hold across workers:
 100 requests/minute on the API, 600/minute on redirects.
